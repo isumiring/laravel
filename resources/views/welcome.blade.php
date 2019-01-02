@@ -84,6 +84,41 @@
                     Laravel
                 </div>
 
+                <div class="form">
+                    <form class="needs-validation" method="POST" action="{{ $form_action }}">
+                        {!! csrf_field() !!}
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-message">
+                                    @if (session('form_message'))
+                                        <div class="alert alert-{{ session('form_message')['status'] }}">
+                                            {!! (is_array(session('form_message')['message'])) ? implode('<br/ >', session('form_message')['message']) : session('form_message')['message'] !!}
+                                            @if ( ! isset(session('form_message')['dismissable']) || session('form_message')['dismissable'] == true)
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            @endif
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="card_number">No. Kartu</label>
+                            <div class="input-group">
+                                <input type="text" maxlength="16" class="form-control number-only" id="card_number" name="card_number" placeholder="No. Kartu" required="required" value="{{ (old('card_number')) ?? '' }}">
+                                <div class="input-group-prepend">
+                                    <button type="submit" class="input-group-button btn btn-primary check-card"><i class="fas fa-search"></i>
+                                        Cari</button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mb-4">
+                        <div class="product-list-data" style="display:none;">
+                        </div>
+                        <hr class="mb-4">
+                    </form>
+                </div>
+
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
                     <a href="https://laracasts.com">Laracasts</a>
